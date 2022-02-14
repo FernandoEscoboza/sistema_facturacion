@@ -1,0 +1,22 @@
+Requimiento para el Sistema de facuracion
+
+
+
+Nodejs
+Angular
+Mysql
+TypeScript
+
+Configuracion del server:
+crear la carpeta server
+iniciando server: npm init
+Instalacion de modulo: express, morgan, promise-mysql, cors, nodemon -D
+crear la carpeta src y build dentro del carpeta server
+ejecutar el comando "tsc --init" para configurar tsconfig.json dentro del proyecto
+Configuracion de tsconfig.json, dentro del archivos descomentamos el comando "outDir:./build"
+package.json: agregar en el scripts los siguientes comandos
+"build":"tsc -w",
+"dev":"nodemon build/index.js"
+Ejecutar los comandos creados: npm run build y npm run dev
+Ejecutar @types/namemodule para cada modulo a utilizar en typescript.
+Ej: npm install @types/express -D

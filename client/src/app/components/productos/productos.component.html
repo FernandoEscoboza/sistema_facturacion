@@ -1,0 +1,64 @@
+
+
+<!-- <ul *ngFor="let list of listprod">
+    <li>Codigo: {{ list.idart }}</li>
+    <li>Nombre: {{ list.descart }}</li>
+    <li>Precio: {{ list.prec_venta }}</li>
+</ul> -->
+
+<input [(ngModel)]="prod.idart" type="text" name="" id="">
+<input type="submit" value="Buscar" (click)="oneProductos()">        
+
+
+<table class="table" >
+    <thead class="table-light"> 
+      <tr> 
+        <th>CODIGO</th> 
+        <th>Descripcion</th>
+        <th>PRECIO</th>
+        <th>CANTIDAD</th>
+        <th> </th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let list of listprod">
+          <td>{{list.idart}}</td>
+          <td>{{list.descart }}</td>
+          <td>{{ list.prec_venta}}</td>
+          <td>{{list.cant_existente}}</td>
+          <td>
+              <a href="" class="btn btn-info btn-block">
+                EDIT PRODUCTO
+        </a></td>
+        <td>
+            <button class="btn btn-danger">
+                <li class="far fa-trash-alt"></li>
+            </button>
+        </td>
+          
+      </tr> 
+    </thead>
+</table>
+
+
+ <!-- <table mat-table #table [dataSource]="listprod">
+     <ng-container matColumnDef="idart">
+        <mat-header-cell *matHeaderCellDef>CODIGO</mat-header-cell>
+         <mat-cell *matCellDef="let list"> {{list.idart}}</mat-cell>
+         
+    </ng-container>
+    <ng-container matColumnDef="descart">
+        <mat-header-cell *matHeaderCellDef>DESCRIPCION</mat-header-cell>
+         <mat-cell *matCellDef="let list"> {{list.descart}}</mat-cell>
+         
+    </ng-container>
+    <ng-container matColumnDef="prec_venta">
+        <mat-header-cell *matHeaderCellDef>PRECIO</mat-header-cell>
+         <mat-cell *matCellDef="let list"> {{list.prec_venta}}</mat-cell>
+         
+    </ng-container>
+    
+ </table> -->
+
+
+
+
