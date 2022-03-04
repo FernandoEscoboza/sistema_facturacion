@@ -1,8 +1,8 @@
 
 export interface productos {
-    idart?:'',
-    descart?:'',
-    prec_compra?:'',
-    prec_venta?:'',
-    cant_existente?:''
+    idart?:string,
+    descart?:string,
+    prec_compra?:number,
+    prec_venta?:number,
+    cant_existente?:number
 }

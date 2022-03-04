@@ -105,6 +105,7 @@ class productos{
       getone(req, res){
         console.log(req.params.id);
         const id = req.params.id;
+        // const desc = req.params.desc;
         conn.query('select art.idart, art.descart, art.prec_venta, st.cant_existente from articulos art inner join stock st on art.idart = st.idart where art.idart=?',[id], (err, result)=>{
           if(err){
             console.log('El error es: '+err);
@@ -119,15 +120,21 @@ class productos{
 
       createProduc(req, res){
             let data = req.body;
+            
             conn.query('insert into articulos set ? ',[data],(err, result)=>{
               if(err) throw err;
               res.status(200).send({message:'Articulos Guardado'});
             });
+            conn.query('insert into stock set ? ',[data],(err, result)=>{
+              if(err) throw err;
+              res.status(200).send({message:'Articulos Guardado'});
+            });
           }
+
           updateProduc(req, res){
             let data = req.body;
             let id = req.params.id;
-            conn.query('update articulos set ? where idart=?', [data, id], (err, result)=>{
+            conn.query('update articulos set ? where idart=? or descart = ?', [data, id], (err, result)=>{
               if (err) throw err;
               res.status(200).send(result);
             });

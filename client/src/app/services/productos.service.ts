@@ -14,8 +14,9 @@ export class ProductosService {
     return this.http.get(this.url+'/getall/');
   }
 
-  oneproductos(id:any){
-    return this.http.get(this.url+'/getone/'+id);
+  oneproductos( id:any){
+    // return this.http.get(this.url+'/getone/',id);
+    return this.http.get(this.url+'/getone/'+ id);
   }
 
   saveproductos(pro: productos){
