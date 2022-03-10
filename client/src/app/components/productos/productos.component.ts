@@ -13,7 +13,7 @@ export class ProductosComponent implements OnInit {
 
   listprod: any = [];
 
-  id: string = '';
+  // idart: string = '';
 
   prod: productos = {
     idart: '',
@@ -44,7 +44,7 @@ export class ProductosComponent implements OnInit {
     );
   }
   oneProductos(){
-    this.producServ.oneproductos(this.id)
+    this.producServ.oneproductos(this.prod.descart)
     .subscribe(
       res=>{
         this.listprod = res;
@@ -53,7 +53,7 @@ export class ProductosComponent implements OnInit {
     );
   }
 
-  deleteProductos(id: number){
+  deleteProductos(id:any){
     this.producServ.deleteproductos(id)
     .subscribe(
       res=>{
@@ -63,6 +63,8 @@ export class ProductosComponent implements OnInit {
         console.log(err);
       }
     );
+    // this.allProductos();
   }
+  
 
 }

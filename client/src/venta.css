@@ -1,0 +1,90 @@
+*{
+    margin:0;
+    padding: 0;
+}
+body{
+    background: url('fondo-certificado-14.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: "Arvo", sans-serif;
+    font-weight: bold;
+}
+h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    
+}
+/* Fecha y Estatus */
+.general{
+    padding: 20px;
+    margin:10px;
+    display: inline-block;
+    float: right;
+
+}
+.general label,input {
+    padding: 4px;
+    margin:5px;
+}
+
+/* Formulario */
+.formulario{
+    padding: 4px;
+    margin: 5px;
+}
+.formulario label{
+    padding: 5px;
+    margin: 5px;
+    font-weight: bold;
+}
+.formulario input{
+    padding: 4px;
+    margin: 5px;
+}
+.formulario .lectura{
+    background:#FDF99E;
+    width: 300px;
+}
+.formulario button{
+    padding: 5px;
+    margin: 5px;
+    font-weight: bold;
+    border-radius: 5px;
+    background: #0015FA;
+    color: white;
+}
+/* tabla de datos */
+@media only screen and(max-width:900px){
+    table{
+        width: 100px!important;
+    }
+    h1{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+ table{
+    padding: 5px;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid black;
+    width: 1000px;
+}
+th,td{
+    padding: 0;
+    margin: 0;
+    border:1px solid black;
+}
+.formulario .botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formulario .botones_basicos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

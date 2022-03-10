@@ -96,7 +96,7 @@ class productos{
                    throw err;
                   //  res.status(404).send({message: 'Error en la consulta'});
                  }           
-                 console.log('Resultado '+result);
+                //  console.log('Resultado '+result);
                  res.status(200).send(result);     
                 });
     
@@ -106,13 +106,13 @@ class productos{
         console.log(req.params.id);
         const id = req.params.id;
         // const desc = req.params.desc;
-        conn.query('select art.idart, art.descart, art.prec_venta, st.cant_existente from articulos art inner join stock st on art.idart = st.idart where art.idart=?',[id], (err, result)=>{
+        conn.query('select art.idart, art.descart, art.prec_venta, st.cant_existente from articulos art inner join stock st on art.idart = st.idart where art.descart like "%'+id+'%"', (err, result)=>{
           if(err){
             console.log('El error es: '+err);
             throw err;
             // res.status(404).send(err);
           }
-          console.log('Resultado '+result);
+          // console.log('Resultado '+result);
           res.status(200).send(result);
     
         });
@@ -135,19 +135,32 @@ class productos{
             let data = req.body;
             let id = req.params.id;
             conn.query('update articulos set ? where idart=? or descart = ?', [data, id], (err, result)=>{
-              if (err) throw err;
+              if (err){
+                console.log('El error es: '+err);
+                throw err;
+              }
               res.status(200).send(result);
+              // console.log('Resultado '+result);
             });
           }
           delete(req,res){
-            let data = req.body;
-            let id = res.params.id;
-            conn.query('delete from articulos where idart=?'[id], (err, result)=>{
-              if(err) throw err;
-              res.stauts(200).send(result);
+            const id = req.params.id;
+            conn.query('call delete_productos(?)',[id], (err, result)=>{
+              if (err){
+                console.log('El error es: '+err);
+                throw err;
+              }
+              res.status(200).send(result);
+              // console.log('Resultado '+result);
             });
           }
 }
 const pro = new productos();
 module.exports = pro;
     
+
+
+// delete articulos, stock 
+// from articulos join stock 
+// on articulos.idart = stock.idart 
+// where articulos.descart='PC Garming 4.0'

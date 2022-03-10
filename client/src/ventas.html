@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="venta.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Arvo&family=Dosis&family=Josefin+Sans:ital@0;1&family=Lato&family=Ubuntu:ital@1&display=swap" rel="stylesheet">
+    <title>Sistema de facturación</title>
+</head>
+
+<body>
+   
+    <main>
+        <h1>Ventas</h1>
+        <div class="general">
+            <label for="fecha">Fecha:</label>
+            <input type="date" name="fecha" id="fecha"><br>
+            <label for="status">Status:</label>
+            <input type="checkbox" name="status" id="status">
+        </div>        
+
+        <div class="formulario">
+            <label for="no_fact">Número de factura:</label>
+            <input type="text" class="lectura " readonly><br>
+
+            <label for="cliente">Cliente:</label>
+            <input type="text" class="cliente">
+            <input type="text" class="lectura" readonly><br>
+
+            <label for="empleado">Empleado:</label>
+            <input type="text" class="empleado">
+            <input type="text" class="lectura" readonly><br>
+
+            <label for="producto">Producto:</label>
+            <input type="text" class="producto">
+            <input type="text" class="lectura" readonly><br>
+
+            <label for="preventa">Precio venta</label>
+            <input type="text" class="preventa" >
+
+            <label for="cantidad">Cantidad:</label>
+            <input type="text" class="cantidad">
+
+            <label for="importe">Importe</label>
+            <input type="text" class="importe">
+            <button>Agregar</button><br>
+
+            <!-- tabla de datos -->
+
+              <table>
+                <tr>
+                  <th>Código</th>
+                  <th>Descripción</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Importe</th>
+                </tr>
+                <tr>
+                    <td>dato 1</td>
+                    <td>dato 2</td>
+                    <td>dato 3</td>
+                    <td>dato 4</td>
+                    <td>dato 5</td>
+                </tr>
+                <tr>
+                    <td>dato 1</td>
+                    <td>dato 2</td>
+                    <td>dato 3</td>
+                    <td>dato 4</td>
+                    <td>dato 5</td>
+ 
+                </tr>
+                <tr>
+                    <td>dato 1</td>
+                    <td>dato 2</td>
+                    <td>dato 3</td>
+                    <td>dato 4</td>
+                    <td>dato 5</td>
+
+                  </tr>
+                  <tr>
+                    <td>dato 1</td>
+                    <td>dato 2</td>
+                    <td>dato 3</td>
+                    <td>dato 4</td>
+                    <td>dato 5</td>                      
+                  </tr>
+                  <tr>
+                    <td>dato 1</td>
+                    <td>dato 2</td>
+                    <td>dato 3</td>
+                    <td>dato 4</td>
+                    <td>dato 5</td>
+                  </tr>
+                  <tr>
+                    <td>dato 1</td>
+                    <td>dato 2</td>
+                    <td>dato 3</td>
+                    <td>dato 4</td>
+                    <td>dato 5</td>
+                  </tr>
+              </table>
+            <br>
+            <div class="botones">
+                <button class="linea">Borrar línea</button>
+                <button class="todo">Limpiar todo</button>
+                <label for="total">Total $</label>
+                <input type="text" class="total"> <br>
+
+                
+            </div>
+            <div class="botones_basicos">
+                <button type="submit">Procesar</button>
+                <button >Eliminar</button>
+                <button>Consultar</button>
+                <button>Cancelar</button>
+                <button>Cerrar</button>
+            </div>
+
+
+        </div>
+        
+    </main>
+</body>
+</html>
