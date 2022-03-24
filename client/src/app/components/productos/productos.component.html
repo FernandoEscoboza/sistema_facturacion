@@ -11,61 +11,78 @@
 <input type="submit" value="Buscar" (click)="oneProductos()">        
 
 </form> -->
-<div>
-    <h2 style="text-align: center;">Registrar productos</h2>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>DESCRIPCION</mat-label>
-      <input matInput placeholder="DESCRIPCION" value="">
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>PRECIO COMPRA</mat-label>
-        <input matInput placeholder="PRECIO COMPRA" value="">
-      </mat-form-field>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>PRECIO VENTA</mat-label>
-        <input matInput placeholder="PRECIO VENTA" value="">
-      </mat-form-field>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>CANTIDAD</mat-label>
-        <input matInput placeholder="CANTIDAD" value="">
-      </mat-form-field> 
-      <button mat-raised-button color="primary" style="margin: 10px;">Guardar</button>
-    </div>
-      <br><br>
-  <!-- <input type="text" name="" id="" placeholder="BUSQUEDA" [(ngModel)]="id"> -->
+<div style="text-align: center;">
+  <h2 >Registrar productos</h2>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>DESCRIPCION</mat-label>
+    <input matInput placeholder="DESCRIPCION" [(ngModel)]="prod.descart">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" >
+  <mat-label>PRECIO COMPRA</mat-label>
+    <input matInput placeholder="PRECIO COMPRA" [(ngModel)]="prod.prec_compra">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill" >
+    <mat-label>PRECIO VENTA</mat-label>
+    <input matInput placeholder="PRECIO VENTA" [(ngModel)]="prod.prec_venta">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>STOCK</mat-label>
+    <input matInput placeholder="STOCK" [(ngModel)]="stock.stock">
+  </mat-form-field> 
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>PUNTO REORDEN</mat-label>
+    <input matInput placeholder="PUNTO REORDEN" [(ngModel)]="stock.punto_reorden">
+  </mat-form-field> 
+  <mat-form-field appearance="fill">
+  <mat-label>ALMACEN</mat-label>
+  <mat-select [(ngModel)]="stock.id_alm">
+    <mat-option *ngFor="let list of listalmacen" [value]="list.idalm" >
+      {{list.nom_alm}}
+    </mat-option> 
+    </mat-select>
+     </mat-form-field>
+  
+  <br>
+  <button mat-raised-button color="primary" style="margin: 10px;" (click)="saved()">Guardar</button>
+  <button mat-raised-button color="primary" style="margin: 10px;" (click)="update()">Actualizar</button>
+  <button mat-raised-button color="primary" style="margin: 10px;" (click)="limpiar()">Limpiar</button>
+</div>
+      
+  <br><br>
 
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>BUSQUEDA</mat-label>
-        <!-- <input matInput placeholder="BUSQUEDA" [(ngModel)]="idart" type="text" (keydown.enter)="oneProductos()"> -->
-        <input matInput placeholder="BUSQUEDA" [(ngModel)]="prod.descart" type="text" (keyup)="oneProductos()">
-        <!-- <input type="text" name="" id="" placeholder="BUSQUEDA" [(ngModel)]="id"> -->
-      </mat-form-field>  
-    <!-- <input type="submit" value="Buscar" >       -->
-    <!-- <button mat-raised-button color="primary" (click)="oneProductos()">Buscar</button>   -->
-    
-    <!-- <h4 [(ngModel)]="prod.idart">Id bidirseccional:</h4>  -->
-
-<h4>Id unidireccional: {{prod.idart}}</h4>
-
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>BUSQUEDA</mat-label>
+    <!-- <input matInput placeholder="BUSQUEDA" [(ngModel)]="prod.descart" type="text" (keyup)=" oneProductos() " > -->
+    <input matInput placeholder="BUSQUEDA" [(ngModel)]="descart" type="text" (keyup)=" oneProductos() " >  
+  </mat-form-field>  
+  <!-- <input matInput placeholder="BUSQUEDA" [(ngModel)]="stock.id_alm" type="text" > -->
+<!-- <label for="" [(ngModel)]="stock.id_alm">{{stock.id_alm}}</label> -->
 <table class="table" >
     <thead class="table-light"> 
       <tr> 
         <th>CODIGO</th> 
-        <th>Descripcion</th>
-        <th>PRECIO</th>
-        <th>CANTIDAD</th>
+        <th>DESCRIPCION</th>
+        <th>PRECIO COMPRA</th>
+        <th>PRECIO VENTA</th>
+        <th>STOCK</th>
+        <th>PUNTO REORDEDN</th>
+        <th>ALMACEN</th>
         <th> </th>
         <th></th>
       </tr>
       <tr *ngFor="let list of listprod">
           <td>{{list.idart}}</td>
           <td>{{list.descart }}</td>
+          <td>{{ list.prec_compra}}</td>
           <td>{{ list.prec_venta}}</td>
-          <td>{{list.cant_existente}}</td>
+          <td>{{list.stock}}</td>
+          <td>{{list.punto_reorden}}</td>
+          <td>{{list.nom_alm}}</td>
           <td>
-              <a href="" class="btn btn-info btn-block" >
-                EDIT PRODUCTO
-        </a></td>
+              <button  class="btn btn-info btn-block" (click)="seleccionar(list.idart, list.descart,list.prec_compra, list.prec_venta, list.stock, list.punto_reorden, list.idalm)">
+                EDITAR
+              </button>
+        </td>
         <td>
             <button class="btn btn-danger"  (click)="deleteProductos(list.idart)">
                 <li class="far fa-trash-alt"></li>

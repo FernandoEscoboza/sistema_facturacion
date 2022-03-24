@@ -7,7 +7,9 @@ conn = mysql.createConnection({
     'user':'root',
     'password':'',
     'port':'3306',
-});
+}, 
+{multipleStatements: true}
+);
 
 
 conn.connect( error => {
