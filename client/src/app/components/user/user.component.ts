@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { UserService } from '../../services/user.service';
+import { users } from '../../models/user';
 
 @Component({
   selector: 'app-user',
@@ -8,27 +11,34 @@ import { UserService } from '../../services/user.service';
 })
 export class UserComponent implements OnInit {
 
-  users:any = [];
+  userlist:any = [];
 
-  constructor(private userServ: UserService) { }
+  users: users = {
+    user: '',
+    password: ''
+  }
+
+  constructor(
+    private userServ: UserService,
+    private router: Router ) { }
 
   ngOnInit(): void {
-    this.getusers();
+    // this.getusers();
   }
 
-  getusers(){
-    this.userServ.getuser()
-    // .pipe()
+  // }
+
+  login(){
+    this.userServ.postlogin(this.users)
     .subscribe(
-      res => this.users = res  
+      (res:any) => {
+        console.log(res);
+        localStorage.setItem('token', res.token);
+        console.log(res);
+        this.router.navigate(['productos']);
+        this.router.navigate(['ventas']);
+      }
     );
   }
-
-  // login(){
-  //   this.userServ.login()
-  //   .subscribe(
-  //     res => console.log(res)
-  //   );
-  // }
 
 }

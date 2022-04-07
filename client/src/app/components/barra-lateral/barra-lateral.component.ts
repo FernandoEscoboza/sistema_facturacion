@@ -18,4 +18,9 @@ export class BarraLateralComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
+  logout(){
+    // window.sessionStorage.removeItem('token');
+    localStorage.removeItem('token');
+  }
+
 }

@@ -1,0 +1,58 @@
+
+const conn = require('../db_connection');
+const jwt = require('jsonwebtoken');
+const { json } = require('body-parser');
+
+class users{
+
+    construtor(){
+        
+    }
+
+    // ensureToken(req, res, next){
+    //     const bearerHeader = req.headers['authorization'];
+    //     if( typeof bearerHeader !== 'undefined'){
+    //         console.log('Bearer: '+bearerHeader);
+    //         const bearer = bearerHeader.split(' ');
+    //         const bearerToken = bearer[1];
+    //         req.token =bearerToken;
+    //         next();
+    //     } else{
+    //         res.sendStatus(404);
+    //     }
+    // }
+
+    postlogin(req, res){
+        const {user, password } = req.body;
+        // let user = req.params.user;
+        // let password = req.params.password;
+        let sql = 'select user, password, id_level from usuarios where user=? and password=? ';
+
+        conn.query(sql, [user, password], (err, result) =>{
+            if(err) throw err;
+            console.log('Los datos consultados son: '+result);
+
+            let data = JSON.stringify(result[0]);
+            let token = jwt.sign(data, 'my_secret');
+            
+
+            res.json({
+                token
+            });
+        });
+    }
+
+    getlogin(req, res){
+        let sql = 'select * from usuarios';
+
+        conn.query(sql, (err, result)=>{
+            if(err) throw err;
+            res.status(200).json(result);
+        });
+    }
+}
+
+const us = new users();
+
+module.exports = us;
+

@@ -14,13 +14,20 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTreeModule } from '@angular/material/tree';
+ 
 import { ProductosComponent } from './components/productos/productos.component';
 import { UserComponent } from './components/user/user.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { VentasComponent } from './components/ventas/ventas.component';
- 
+import { AlmacenesComponent } from './components/almacenes/almacenes.component';
+
+// Providers
+import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
+import { LoginComponent } from './components/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +35,8 @@ import { VentasComponent } from './components/ventas/ventas.component';
     ProductosComponent,
     UserComponent,
     VentasComponent,
+    AlmacenesComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +54,10 @@ import { VentasComponent } from './components/ventas/ventas.component';
     FormsModule,
     MatSelectModule,
   ],
-  providers: [],
+  providers: [
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS},
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

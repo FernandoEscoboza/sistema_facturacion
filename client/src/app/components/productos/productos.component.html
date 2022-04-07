@@ -71,7 +71,13 @@
         <th></th>
       </tr>
       <tr *ngFor="let list of listprod">
-          <td>{{list.idart}}</td>
+          <!-- <td mat>{{list.idart}}</td> -->
+          <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+              Symbol
+            </th>
+            <td mat-cell *matCellDef="let element"> {{list.idart}} </td>
+          </ng-container>
           <td>{{list.descart }}</td>
           <td>{{ list.prec_compra}}</td>
           <td>{{ list.prec_venta}}</td>

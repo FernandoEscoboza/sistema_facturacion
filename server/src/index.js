@@ -1,11 +1,14 @@
 
 const express = require('express');
 const app = express();
-const routerProductos = require('./routers/productos');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 
+// const userController = require('./controllers/user');
+
+const routerProductos = require('./routers/productos');
+const routerUser = require('./routers/user');
 const port = process.env.port || 3000;
 
 // Configuracion
@@ -16,7 +19,8 @@ app.use(morgan('dev'));
 
 // // Routes
 app.use('/productos', routerProductos );
-
+app.use('/user', routerUser);
+// app.use(userController.ensureToken);
 
 // Configurar cabeceras y cors
 // app.use((req, res, next) => {

@@ -12,4 +12,8 @@ export class VentasComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  printThisPage(){
+    window.print();
+  }
+
 }
