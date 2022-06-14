@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   userlist:any = [];
 
   users: users = {
+    iduser: 0,
     user: '',
     password: ''
   }
@@ -30,10 +31,11 @@ export class LoginComponent implements OnInit {
       (res:any) => {
         console.log(res);
         localStorage.setItem('token', res.token);
+        this.users.iduser = res.token;
         // localStorage
-        console.log(res);
-        this.router.navigate(['productos']);
-        // this.router.navigate(['ventas']);
+        console.log("IdUser: "+ this.users.iduser);
+        // this.router.navigate(['productos']);
+        this.router.navigate(['']);
       }
     );
   }

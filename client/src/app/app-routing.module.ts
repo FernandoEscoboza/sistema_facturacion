@@ -6,12 +6,17 @@ import { UserComponent } from './components/user/user.component';
 import { VentasComponent } from './components/ventas/ventas.component';
 import { LoginComponent } from './components/login/login.component';
 import { UserGuard } from './guards/user.guard';
+import { BarraLateralComponent } from './components/barra-lateral/barra-lateral.component';
 
 const routes: Routes = [  
+  {
+    path: '',
+    redirectTo:'/',
+    pathMatch: 'full'
+  },
   // {
-  //   path: '',
-  //   redirectTo:'/login',
-  //   pathMatch: 'full'
+  //   path:'menu',
+  //   component: BarraLateralComponent
   // },
   {
     path: 'login',

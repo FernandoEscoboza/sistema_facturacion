@@ -8,6 +8,8 @@ import { productos, stock } from '../models/productos'
 export class ProductosService {
 
   url = 'http://localhost:3000/productos';
+  
+  // url = 'https://fernandoescoboza.eshost.com.ar/server/productos';
   constructor(private http: HttpClient) { }
 
   allproductos(){

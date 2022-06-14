@@ -2,114 +2,119 @@
    
     <main>
         <h1>Ventas</h1>
-        <div class="general">
+        <!-- <div class="general">
             <label for="fecha">Fecha:</label>
             <input type="date" name="fecha" id="fecha"><br>
             <label for="status">Status:</label>
             <input type="checkbox" name="status" id="status">
-        </div>        
+        </div>         -->
 
         <div class="formulario">
             <label for="no_fact">Número de factura:</label>
-            <input type="text" class="lectura " readonly><br>
+            <input class="lectura" [(ngModel)]=" idventas" disabled>
+            <button (click)="opensales()">Abrir Factura</button>
+            <br>
 
-            <label for="cliente">Cliente:</label>
-            <input type="text" class="cliente">
-            <input type="text" class="lectura" readonly><br>
+            <label for="cliente">Cliente:  </label>
+            <input type="text" class="cliente" id="iduser">
+            <input type="text" class="lectura" readonly id="idnom"><br>
 
-            <label for="empleado">Empleado:</label>
+            <!-- <label for="empleado">Empleado:</label>
             <input type="text" class="empleado">
-            <input type="text" class="lectura" readonly><br>
+            <input type="text" class="lectura" readonly><br> -->
 
-            <label for="producto">Producto:</label>
-            <input type="text" class="producto">
-            <input type="text" class="lectura" readonly><br>
+            <label for="producto">Producto:     </label>
+            <input type="text" class="producto" id="buscaridprod" [(ngModel)]="idprod" (focus)="idprod" (keyup)=" oneproductos() " >
+            <input type="text" class="lectura" id="idprod" readonly><br>
+            <input type="button" value="Buscar Producto" (click)="buscar()" >
 
             <label for="preventa">Precio venta</label>
-            <input type="text" class="preventa" >
+            <input type="text" class="preventa" [(ngModel)]="prec_ventas" disabled>
 
             <label for="cantidad">Cantidad:</label>
-            <input type="text" class="cantidad">
+            <input type="text" class="cantidad" id="cantidad" [(ngModel)]="cantidad" (keyup.enter)="agregar()">
 
-            <label for="importe">Importe</label>
-            <input type="text" class="importe">
-            <button>Agregar</button><br>
+            <!-- <label for="importe">Importe</label>
+            <input type="text" class="importe" [(ngModel)]="importe" disabled> -->
+            <button (click)="agregar()">Agregar</button><br>
+
+            
+          </div>
+          
 
             <!-- tabla de datos -->
-
-              <table>
+          <div class="tabla">
+            <table class="table">
+              <thead>
                 <tr>
                   <th>Código</th>
                   <th>Descripción</th>
-                  <th>Precio</th>
                   <th>Cantidad</th>
+                  <th>Precio</th>
                   <th>Importe</th>
+                  <!-- <th>Cantidad</th> -->
+                  <!-- <th>Importe</th> -->
                 </tr>
-                <tr>
-                    <td>dato 1</td>
-                    <td>dato 2</td>
-                    <td>dato 3</td>
-                    <td>dato 4</td>
-                    <td>dato 5</td>
-                </tr>
-                <tr>
-                    <td>dato 1</td>
-                    <td>dato 2</td>
-                    <td>dato 3</td>
-                    <td>dato 4</td>
-                    <td>dato 5</td>
- 
-                </tr>
-                <tr>
-                    <td>dato 1</td>
-                    <td>dato 2</td>
-                    <td>dato 3</td>
-                    <td>dato 4</td>
-                    <td>dato 5</td>
+              </thead>
+              <tbody>
+                <!-- <tr>
+                  <td>dato 1</td>
+                  <td>dato 2</td>
+                  <td>dato 3</td>
+                  <td>dato 4</td>
+                  <td>dato 5</td>
+              </tr> -->
+              <!-- <tr *ngFor="let list of listventas">
+                <td>{{list.auto_increment}}</td>
+              </tr> -->
+              <tr *ngFor="let list of listdet_ventas; let indice=index">
+                <!-- <td>{{list[indice].idart}}</td>
+                <td>{{list[indice].descart}}</td>
+                <td>{{list[indice].prec_venta}}</td> -->
+                <td>{{list.idart}}</td>
+                <td>{{list.descart}}</td>
+                <td>{{list.cantidad}}</td>
+                <td>{{list.prec_ventas}}</td>
+                <td>{{list.importe}}</td>
+                <td>
+                  <button class="btn btn-danger" (click)="eliminarprod(list.idart, list.descart)">
+                    <li class="far fa-trash-alt"></li>
+                  </button>
+                </td>
+                <!-- <!-- <td>{{listdet_ventas[list].descart}}</td> -->
+                <!-- <td>{{listdet_ventas[list].prec_venta}}</td> -->
+              </tr>
 
-                  </tr>
-                  <tr>
-                    <td>dato 1</td>
-                    <td>dato 2</td>
-                    <td>dato 3</td>
-                    <td>dato 4</td>
-                    <td>dato 5</td>                      
-                  </tr>
-                  <tr>
-                    <td>dato 1</td>
-                    <td>dato 2</td>
-                    <td>dato 3</td>
-                    <td>dato 4</td>
-                    <td>dato 5</td>
-                  </tr>
-                  <tr>
-                    <td>dato 1</td>
-                    <td>dato 2</td>
-                    <td>dato 3</td>
-                    <td>dato 4</td>
-                    <td>dato 5</td>
-                  </tr>
-              </table>
-            <br>
+              </tbody>
+            </table>
+            
             <div class="botones">
-                <button class="linea">Borrar línea</button>
-                <button class="todo">Limpiar todo</button>
-                <label for="total">Total $</label>
-                <input type="text" class="total"> <br>
+              <label for="total">Total $</label>
+              <input type="text" class="total" disabled [(ngModel)]="ventas.total"> <br>
 
-                
-            </div>
-            <div class="botones_basicos">
+              <!-- <button class="linea">Borrar línea</button> -->
+              <!-- <button class="todo">Limpiar todo</button> -->
+
+              <button (click)="savedsales()">Procesar</button>
+              <!-- <button (click)="eliminarprod(idprod)" >Eliminar</button> -->
+              <!-- <button>Consultar</button> -->
+              <button (click)="cancelsales()">Cancelar</button>
+              <!-- <button>Cerrar</button> -->
+              
+        <button (click)="printThisPage()">Imprimir</button>
+              
+          </div>
+          </div>
+            <!-- <br> -->
+            <!-- <div class="botones_basicos">
                 <button type="submit">Procesar</button>
-                <button >Eliminar</button>
+                <button (click)="elimiarprod()" >Eliminar</button>
                 <button>Consultar</button>
                 <button>Cancelar</button>
                 <button>Cerrar</button>
-            </div>
+            </div> -->
 
 
-        </div>
-        <button (click)="printThisPage()">Imprimir</button>
         
     </main>
 

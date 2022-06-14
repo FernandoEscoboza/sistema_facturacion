@@ -18,7 +18,6 @@ export class ProductosComponent implements OnInit {
   idart: any = [];
 
   prod: productos = {
-    idart: '',
     descart: '',
     prec_compra: '',
     prec_venta: ''
@@ -85,7 +84,6 @@ export class ProductosComponent implements OnInit {
   }
 
   saved(){
-    // this.validar();
 
     this.producServ.saveproductos(this.prod)
     .subscribe(
@@ -101,7 +99,7 @@ export class ProductosComponent implements OnInit {
           res=>{
             this.allProductos();
             
-    this.limpiar();
+            this.limpiar();
             alert('Producto Registrado');
 
            

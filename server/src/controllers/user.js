@@ -26,7 +26,7 @@ class users{
         const {user, password } = req.body;
         // let user = req.params.user;
         // let password = req.params.password;
-        let sql = 'select user, password, id_level from usuarios where user=? and password=? ';
+        let sql = 'select iduser, user, password from usuarios where user=? and password=? ';
 
         conn.query(sql, [user, password], (err, result) =>{
             if(err) throw err;
@@ -34,10 +34,17 @@ class users{
 
             let data = JSON.stringify(result[0]);
             let token = jwt.sign(data, 'my_secret');
-            
+            // let token = jwt.sign(result, process.env.TOKEN_SECRET );
+            let iduser = result[0]['iduser'];
+            // let iduser = jwt.sign( result[0].iduser, 'my_user');
+            // jwt.
+            console.log('Los datos consultados son: '+data);
+            console.log('El id es : '+ result[0].iduser);
+            // console.log(jwt_payload);
 
             res.json({
-                token
+                token,
+                iduser
             });
         });
     }

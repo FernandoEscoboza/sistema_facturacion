@@ -8,6 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class UserService {
 
   url = 'http://localhost:3000/user' ;
+  // url = 'https://fernandoescoboza.eshost.com.ar/server/user';
 
   constructor(private htpp:HttpClient,
     private jwthelper: JwtHelperService ) { }

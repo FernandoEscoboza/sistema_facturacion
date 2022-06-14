@@ -5,13 +5,14 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 
-// const userController = require('./controllers/user');
+const port = process.env.port || 3000;
 
 const routerProductos = require('./routers/productos');
 const routerUser = require('./routers/user');
-const port = process.env.port || 3000;
+const routerVentas = require('./routers/ventas');
 
 // Configuracion
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
@@ -20,6 +21,7 @@ app.use(morgan('dev'));
 // // Routes
 app.use('/productos', routerProductos );
 app.use('/user', routerUser);
+app.use('/ventas', routerVentas);
 // app.use(userController.ensureToken);
 
 // Configurar cabeceras y cors

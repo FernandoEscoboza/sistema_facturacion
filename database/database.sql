@@ -1,17 +1,17 @@
 CREATE TABLE `pais` (
-  `idpais` int,
+  `idpais` int auto_increment,
   `nompais` varchar(100),
   KEY `PRIMARY key` (`idpais`)
 );
 
 CREATE TABLE `level_usuarios` (
-  `idlevel` int,
+  `idlevel` int auto_increment,
   `desc_level` varchar(15),
   KEY `PRIMARY key` (`idlevel`)
 );
 
 CREATE TABLE `articulos` (
-  `idart` int,
+  `idart` int auto_increment,
   `descart` varchar(150),
   `prec_compra` float,
   `prec_venta` float,
@@ -19,13 +19,13 @@ CREATE TABLE `articulos` (
 );
 
 CREATE TABLE `tipo_documento` (
-  `idtip_doc` int,
+  `idtip_doc` int auto_increment,
   `desc_doc` varchar(20),
   KEY `PRIMARY key` (`idtip_doc`)
 );
 
 CREATE TABLE `documento` (
-  `id_doc` int,
+  `id_doc` int auto_increment,
   `id_tip_doc` int,
   `desc_doc` varchar(20),
   FOREIGN KEY (`id_tip_doc`) REFERENCES `tipo_documento`(`idtip_doc`),
@@ -33,7 +33,7 @@ CREATE TABLE `documento` (
 );
 
 CREATE TABLE `region` (
-  `idreg` int,
+  `idreg` int auto_increment,
   `nomreg` varchar(100),
   `idpais` int,
   FOREIGN KEY (`idpais`) REFERENCES `pais`(`idpais`),
@@ -41,7 +41,7 @@ CREATE TABLE `region` (
 );
 
 CREATE TABLE `provincia` (
-  `idprov` int,
+  `idprov` int auto_increment,
   `nomprov` varchar(100),
   `idreg` int,
   FOREIGN KEY (`idreg`) REFERENCES `region`(`idreg`),
@@ -49,7 +49,7 @@ CREATE TABLE `provincia` (
 );
 
 CREATE TABLE `ciudad` (
-  `idciudad` int,
+  `idciudad` int auto_increment,
   `nomciudad` varchar(100),
   `idprov` int,
   FOREIGN KEY (`idprov`) REFERENCES `provincia`(`idprov`),
@@ -57,7 +57,7 @@ CREATE TABLE `ciudad` (
 );
 
 CREATE TABLE `sector` (
-  `idsector` int,
+  `idsector` int auto_increment,
   `nomsector` varchar(100),
   `idciudad` int,
   FOREIGN KEY (`idciudad`) REFERENCES `ciudad`(`idciudad`),
@@ -65,15 +65,15 @@ CREATE TABLE `sector` (
 );
 
 CREATE TABLE `direccion` (
-  `iddireccion` int,
+  `iddireccion` int auto_increment,
   `nomdireccion` varchar(100),
   `idsector` int,
   FOREIGN KEY (`idsector`) REFERENCES `sector`(`idsector`),
   KEY `PRIMARY key` (`iddireccion`)
 );
 
-CREATE TABLE `persona` (
-  `idpersona` int,
+CREATE TABLE `personas` (
+  `idpersona` int auto_increment,
   `nom_persona` varchar(50),
   `ape_persona` varchar(50),
   `iddireccion` int,
@@ -86,15 +86,15 @@ CREATE TABLE `persona` (
 );
 
 CREATE TABLE `empleados` (
-  `idemp` int,
+  `idemp` int auto_increment,
   `idpersona` int,
   `cargo` varchar(50),
-  FOREIGN KEY (`idpersona`) REFERENCES `persona`(`idpersona`),
+  FOREIGN KEY (`idpersona`) REFERENCES `personas`(`idpersona`),
   KEY `PRIMARY key` (`idemp`)
 );
 
 CREATE TABLE `usuarios` (
-  `iduser` int,
+  `iduser` int auto_increment,
   `user` varchar(15),
   `password` varchar(20),
   `idemp` int,
@@ -105,7 +105,7 @@ CREATE TABLE `usuarios` (
 );
 
 CREATE TABLE `compras` (
-  `idcompras` int,
+  `idcompras` int auto_increment,
   `fecha_compras` date,
   `id_cli` date,
   `iduser` int,
@@ -124,15 +124,24 @@ CREATE TABLE `det_compras` (
   FOREIGN KEY (`idcompras`) REFERENCES `compras`(`idcompras`)
 );
 
+CREATE TABLE `status_ventas` (
+  `idstatus` int auto_increment,
+  `desc_status` varchar(15),
+  KEY `PRIMARY key` (`idstatus`)
+);
+
 CREATE TABLE `ventas` (
-  `idventas` int,
+  `idventas` int auto_increment,
   `fecha_ventas` date,
   `id_cli` date,
   `iduser` int,
   `total` float,
+  `idstatus` int,
   FOREIGN KEY (`iduser`) REFERENCES `usuarios`(`iduser`),
+  FOREIGN KEY (`idstatus`) REFERENCES `status_ventas`(`idstatus`),
   KEY `PRIMARY key` (`idventas`)
 );
+
 
 CREATE TABLE `det_ventas` (
   `idventas` int,
@@ -141,11 +150,21 @@ CREATE TABLE `det_ventas` (
   `prec_ventas` float,
   `importe` float,
   FOREIGN KEY (`idventas`) REFERENCES `ventas`(`idventas`),
-  FOREIGN KEY (`idventas`) REFERENCES `articulos`(`idart`)
+  FOREIGN KEY (`idart`) REFERENCES `articulos`(`idart`)
+);
+
+CREATE TABLE `temp_det_ventas` (
+  `idventas` int,
+  `idart` int,
+  `cantidad` float,
+  `prec_ventas` float,
+  `importe` float,
+  FOREIGN KEY (`idventas`) REFERENCES `ventas`(`idventas`),
+  FOREIGN KEY (`idart`) REFERENCES `articulos`(`idart`)
 );
 
 CREATE TABLE `almacen` (
-  `idalm` int,
+  `idalm` int auto_increment,
   `nom_alm` varchar(150),
   `id_direccion` int,
   FOREIGN KEY (`id_direccion`) REFERENCES `direccion`(`iddireccion`),
@@ -155,34 +174,34 @@ CREATE TABLE `almacen` (
 CREATE TABLE `stock` (
   `idart` int,
   `stock` int,
-  `cant_existente` int,
+  `punto_reorden` int,
   `id_alm` int,
   FOREIGN KEY (`idart`) REFERENCES `articulos`(`idart`),
   FOREIGN KEY (`id_alm`) REFERENCES `almacen`(`idalm`)
 );
 
 CREATE TABLE `proveedor` (
-  `idprov` int,
+  `idprov` int auto_increment,
   `idpersona` int,
-  FOREIGN KEY (`idpersona`) REFERENCES `persona`(`idpersona`),
+  FOREIGN KEY (`idpersona`) REFERENCES `personas`(`idpersona`),
   KEY `PRIMARY key` (`idprov`)
 );
 
 CREATE TABLE `clientes` (
-  `idcli` int,
+  `idcli` int auto_increment,
   `idpersona` int,
-  FOREIGN KEY (`idpersona`) REFERENCES `persona`(`idpersona`),
+  FOREIGN KEY (`idpersona`) REFERENCES `personas`(`idpersona`),
   KEY `PRIMARY key` (`idcli`)
 );
 
 CREATE TABLE `status` (
-  `idstatus` int,
+  `idstatus` int auto_increment,
   `descstatus` varchar(20),
   KEY `PRIMARY key` (`idstatus`)
 );
 
 CREATE TABLE `pedidos_clientes` (
-  `idped_cli` int,
+  `idped_cli` int auto_increment,
   `idstatus` int,
   `idcli` int,
   FOREIGN KEY (`idcli`) REFERENCES `empleados`(`idemp`),
@@ -200,4 +219,3 @@ CREATE TABLE `detalles_pedidos_clientes` (
   FOREIGN KEY (`idart`) REFERENCES `articulos`(`idart`),
   FOREIGN KEY (`idped_cli`) REFERENCES `pedidos_clientes`(`idped_cli`)
 );
-

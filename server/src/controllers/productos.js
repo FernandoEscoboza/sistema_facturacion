@@ -9,6 +9,8 @@ class productos{
 
   }
 
+  // Init Productos
+
   getall(req, res){
 
     let sql = 'select art.idart, art.descart, art.prec_compra, art.prec_venta, st.stock, st.punto_reorden, alm.idalm, alm.nom_alm ' 
@@ -53,8 +55,8 @@ class productos{
   }
 
   createProduc(req, res){
-    let pro = req.body;
-    let sql = 'select auto_increment from information_schema.TABLES where TABLE_SCHEMA = "sistema_facturacion" and TABLE_NAME = "articulos";  ';
+    let data = req.body;
+    let sql = 'select auto_increment from information_schema.TABLES where TABLE_SCHEMA = "fernand1_sistema_facturacion" and TABLE_NAME = "articulos";  ';
     
     conn.query(sql,(err, result)=>{
       if(err) throw err;
@@ -62,23 +64,26 @@ class productos{
       res.status(200).send(result);
     });
   
-    let sql2 = ' insert into articulos set ?';
+    let descart = data.descart;
+    let prec_c = data.prec_compra;
+    let prec_v = data.prec_venta;
 
-    conn.query(sql2,[pro],(err, result)=>{
+    let sql2 = 'insert into articulos(descart,prec_compra,prec_venta) values(?,?,?)';
+
+    conn.query(sql2,[descart, prec_c, prec_v],(err, result)=>{
       if(err) throw err;
+      // console.log('Datos insertados');
     });
+
+      // let sql2 = ' insert into articulos set ?';
+
+    // conn.query(sql2,[data],(err, result)=>{
+    //   if(err) throw err;
+    //   console.log('Datos insertados');
+    // });
     
   }
-      
-  createStock(req, res){
-    let stock = req.body;
-    
-  
-    conn.query('insert into stock set ? ',[stock],(err, result)=>{
-      if(err) throw err;
-      res.status(200).send({message:'Stock Guardado'});
-    });
-  }
+   
 
   updateProduc(req, res){
     let data = req.body;
@@ -120,17 +125,37 @@ class productos{
     });
   }
 
+  // delete(req,res){
+  //   const id = req.params.id;
+  //   conn.query('call delete_productos(?)',[id], (err, result)=>{
+  //     if (err){
+  //       console.log('El error es: '+err);
+  //       throw err;
+  //     }
+  //     res.status(200).send(result);
+  //     // console.log('Resultado '+result);
+  //   });
+  // }
   delete(req,res){
     const id = req.params.id;
-    conn.query('call delete_productos(?)',[id], (err, result)=>{
+    conn.query('DELETE from stock where idart = ? ',[id], (err, result)=>{
       if (err){
         console.log('El error es: '+err);
         throw err;
-      }
+      } 
+      conn.query('DELETE from articulos where idart = ? ',[id], (err, result)=>{
+        if (err){
+          console.log('El error es:'+err);
+          throw err;
+        }
+        // res.status(200).send(result);
+        // console.log('Resultado '+result);
+      });
       res.status(200).send(result);
       // console.log('Resultado '+result);
     });
   }
+  // End Productos
 
   getalmacen(req, res){
     let sql = 'select idalm, nom_alm from almacen';
@@ -139,6 +164,26 @@ class productos{
       if (err) throw err;
 
       res.status(200).send(result);
+    });
+  }
+
+     
+  createStock(req, res){
+    let stock = req.body;
+
+    let idart = stock.idart;
+    let stock_prod = stock.stock;
+    let punto_reorden = stock.punto_reorden;
+    let idalm = stock.id_alm;
+    
+
+    let sql = 'insert into stock(idart, stock, punto_reorden, id_alm) values(?,?,?,?)';
+    
+  
+    conn.query(sql,[idart, stock_prod, punto_reorden, idalm],(err, result)=>{
+      if(err) throw err;
+      console.log('Stock guardado');
+      res.status(200).send({message:'Stock Guardado'});
     });
   }
 }

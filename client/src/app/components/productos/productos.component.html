@@ -57,10 +57,10 @@
   </mat-form-field>  
   <!-- <input matInput placeholder="BUSQUEDA" [(ngModel)]="stock.id_alm" type="text" > -->
 <!-- <label for="" [(ngModel)]="stock.id_alm">{{stock.id_alm}}</label> -->
-<table class="table" >
-    <thead class="table-light"> 
+<table class="table table-hover" >
+    <thead > 
       <tr> 
-        <th>CODIGO</th> 
+        <th >CODIGO</th> 
         <th>DESCRIPCION</th>
         <th>PRECIO COMPRA</th>
         <th>PRECIO VENTA</th>
@@ -70,14 +70,10 @@
         <th> </th>
         <th></th>
       </tr>
+    </thead>
+    <tbody>
       <tr *ngFor="let list of listprod">
-          <!-- <td mat>{{list.idart}}</td> -->
-          <ng-container matColumnDef="symbol">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
-              Symbol
-            </th>
-            <td mat-cell *matCellDef="let element"> {{list.idart}} </td>
-          </ng-container>
+          <td >{{list.idart}}</td>
           <td>{{list.descart }}</td>
           <td>{{ list.prec_compra}}</td>
           <td>{{ list.prec_venta}}</td>
@@ -96,7 +92,7 @@
         </td>
           
       </tr> 
-    </thead>
+    </tbody>
 </table>
 
 
